@@ -17,6 +17,12 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
+Route::view('/dashboard','index')->name('dashboard');
+Route::view('/insumos','catalogos.insumos')->name('insumos');
+Route::view('/proveedores','catalogos.proveedores')->name('proveedores');
+Route::view('/categorias','catalogos.categorias')->name('categorias');
+
+
+Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard1', function () {
     return view('dashboard');
-})->name('dashboard');
+})->name('dashboard1');
