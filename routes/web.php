@@ -1,6 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Catalogos\CatalogoController;
+use App\Http\Controllers\CategoryController;
 
 /*
 |--------------------------------------------------------------------------
@@ -20,7 +22,9 @@ Route::get('/', function () {
 Route::view('/dashboard','index')->name('dashboard');
 Route::view('/insumos','catalogos.insumos')->name('insumos');
 Route::view('/proveedores','catalogos.proveedores')->name('proveedores');
-Route::view('/categorias','catalogos.categorias')->name('categorias');
+Route::get('/categorias',[CatalogoController::class,'categorias'])->name('categorias');
+
+Route::resource('categoria',CategoryController::class);
 
 
 Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard1', function () {
