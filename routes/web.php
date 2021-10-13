@@ -23,6 +23,7 @@ Route::view('/dashboard','index')->name('dashboard');
 Route::view('/insumos','catalogos.insumos')->name('insumos');
 Route::view('/proveedores','catalogos.proveedores')->name('proveedores');
 Route::get('/categorias',[CatalogoController::class,'categorias'])->name('categorias');
+Route::get('/categoria/{id}/subcategorias',[CatalogoController::class,'subcategorias'])->name('subcategorias');
 
 Route::resource('categoria',CategoryController::class);
 

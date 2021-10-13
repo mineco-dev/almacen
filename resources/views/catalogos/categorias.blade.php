@@ -25,6 +25,6 @@
 
 &nbsp;
 
-<x-catalogo-table :items="$categorias"/>
+<x-catalogo-table :items="$categorias" :titles="['Renglón','Categoría','Acción']" :columns="['renglon','nombre']" :acciones="['Subcategorías']" :rutas="['subcategorias']"/>
 
 @endsection

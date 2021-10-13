@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
 use App\Models\Category;
+use App\Models\Subcategory;
 use App\Models\User;
 
 class DatabaseSeeder extends Seeder
@@ -21,6 +22,7 @@ class DatabaseSeeder extends Seeder
             'email' => 'juanjosedelaguilalopez@gmail.com',
             'password' => bcrypt('12345678')
         ]); 
+        Subcategory::factory(25)->create();
     }
 }
 /* App\User::create([
