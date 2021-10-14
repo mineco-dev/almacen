@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Catalogos\CatalogoController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\SubcategoryController;
+use App\Http\Controllers\PresentationController;
 
 /*
 |--------------------------------------------------------------------------
@@ -28,6 +29,7 @@ Route::get('/categoria/{id}/subcategorias',[CatalogoController::class,'subcatego
 
 Route::resource('categoria',CategoryController::class)->middleware('auth');
 Route::resource('subcategoria',SubcategoryController::class)->middleware('auth');
+Route::resource('presentaciones',PresentationController::class)->middleware('auth');
 
 
 Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard1', function () {

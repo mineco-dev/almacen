@@ -40,6 +40,10 @@
                                     Proveedores
                                 </x-jet-dropdown-link>
 
+                                <x-jet-dropdown-link href="{{ route('presentaciones.index') }}">
+                                    Presentaciones
+                                </x-jet-dropdown-link>
+
                             </x-slot>
                         </x-jet-dropdown>
 
