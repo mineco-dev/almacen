@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Subcategory;
 use Illuminate\Http\Request;
+use App\Http\Requests\SubcategoryRequest;
+
 
 class SubcategoryController extends Controller
 {
@@ -14,7 +16,6 @@ class SubcategoryController extends Controller
      */
     public function index()
     {
-        
     }
 
     /**
@@ -33,9 +34,12 @@ class SubcategoryController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(SubcategoryRequest $request)
     {
-        //
+        //salvar
+        $categoria = Subcategory::create($request->all());
+
+        return back()->with('status', 'Creado con éxito');
     }
 
     /**
@@ -78,8 +82,10 @@ class SubcategoryController extends Controller
      * @param  \App\Models\Subcategory  $subcategory
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Subcategory $subcategory)
+    public function destroy($id)
     {
-        //
+        Subcategory::where('id', $id)->delete();
+
+        return back()->with('status','Eliminado Con éxito');
     }
 }

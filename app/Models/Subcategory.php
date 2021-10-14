@@ -9,6 +9,10 @@ class Subcategory extends Model
 {
     use HasFactory;
 
+    protected $fillable = [
+        'codigo', 'nombre','category_id'
+    ];
+
     public function category()
     {
         return $this->belongsTo(Subcategory::class);

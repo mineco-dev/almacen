@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Catalogos\CatalogoController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\SubcategoryController;
 
 /*
 |--------------------------------------------------------------------------
@@ -22,10 +23,11 @@ Route::get('/', function () {
 Route::view('/dashboard','index')->name('dashboard');
 Route::view('/insumos','catalogos.insumos')->name('insumos');
 Route::view('/proveedores','catalogos.proveedores')->name('proveedores');
-Route::get('/categorias',[CatalogoController::class,'categorias'])->name('categorias');
-Route::get('/categoria/{id}/subcategorias',[CatalogoController::class,'subcategorias'])->name('subcategorias');
+Route::get('/categorias',[CatalogoController::class,'categorias'])->name('categorias')->middleware('auth');
+Route::get('/categoria/{id}/subcategorias',[CatalogoController::class,'subcategorias'])->name('subcategorias')->middleware('auth');
 
-Route::resource('categoria',CategoryController::class);
+Route::resource('categoria',CategoryController::class)->middleware('auth');
+Route::resource('subcategoria',SubcategoryController::class)->middleware('auth');
 
 
 Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard1', function () {

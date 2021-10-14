@@ -1,10 +1,27 @@
 @extends('layouts.web')
 
 @section('content')
-    <div class=text-center>
-        <h1 class="text-3xl text-gray-700 mb-2 uppercase">Subcategorías</h1>
-    </div>
-    <x-catalogo-table :items="$subcategorias" :titles="['1'=>'codigo','2'=>'Subcategoría','3'=>'','4'=>'']" :columns="['1'=>'id','2'=>'nombre']" :acciones="['1'=>'Agregar','2'=>'Eliminar']"/>
 
+    <x-subcategoria-form  :categoria="$categoria" />
+
+    &nbsp;
+    @if (session('status'))
+
+    <div class="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded relative" role="alert">
+        <strong class="font-bold">{{ session('status') }}</strong>
+
+        <span class="absolute top-0 bottom-0 right-0 px-4 py-3">
+
+        </span>
+
+    </div>
+
+    @endif
+
+    &nbsp;
+
+    <x-table-button-form :items="$subcategorias" :titles="['Código','Subcategoría','']" :columns="['codigo','nombre']" :acciones="['Eliminar']" parametroRuta="id" ruta="subcategoria.destroy">
+
+    </x-table-button-form>
 
 @endsection

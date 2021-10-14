@@ -11,9 +11,6 @@ class CatalogoController extends Controller
 {
     public function categorias()
     {
-        $categorias = Category::latest()->paginate(15);
-
-        dd();
         return view('catalogos.categorias',[
             'categorias' => Category::latest()->paginate(15)
         ]);
@@ -21,8 +18,12 @@ class CatalogoController extends Controller
 
     public function subcategorias($id)
     {
+        $categoria = Category::findOrFail($id);
+
+
         return view('catalogos.subcategorias',[
-            'subcategorias' => Category::findOrFail($id)->subcategorias()->simplePaginate(5)
+            'subcategorias' => $categoria->subcategorias()->paginate(5),
+            'categoria' => $categoria
         ]);
     }
 }

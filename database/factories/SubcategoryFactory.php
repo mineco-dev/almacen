@@ -23,6 +23,7 @@ class SubcategoryFactory extends Factory
     {
         return [
             'category_id' => $this->faker->numberBetween(1, 5),
+            'codigo' => $this->faker->numberBetween(1, 1000),
             'nombre' => $this->faker->sentence
         ];
     }

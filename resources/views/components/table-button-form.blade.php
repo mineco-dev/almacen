@@ -24,17 +24,13 @@
 
                                 @foreach($acciones as $accion)
                                 <td class="px-6 py-4 whitespace-nowrap">
-                                    <a href="{{ route($ruta, $item->{$parametroRuta}) }}">
-                                    @method('DELETE')
-                                        <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold p-2 px-4 rounded focus:outline-none focus:shadow-outline mt-2">{{ $accion }}
-
-                                        </button>
-                                    </a>
+                                    <form action="{{ route($ruta,$item) }}" method="POST">
+                                        @csrf
+                                        @method('DELETE')
+                                        <input type="submit" value="{{ $accion }}" class="bg-blue-500 hover:bg-blue-700 text-white font-bold p-2 px-4 rounded focus:outline-none focus:shadow-outline mt-2" onclick="return confirm('¿Deseas eliminar?')">
+                                    </form>
                                 </td>
                                 @endforeach
-
-
-
 
                             </tr>
                             @endforeach
