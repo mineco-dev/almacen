@@ -5,6 +5,7 @@ use App\Http\Controllers\Catalogos\CatalogoController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\SubcategoryController;
 use App\Http\Controllers\PresentationController;
+use App\Http\Controllers\InsumoController;
 
 /*
 |--------------------------------------------------------------------------
@@ -22,7 +23,7 @@ Route::get('/', function () {
 });
 
 Route::view('/dashboard','index')->name('dashboard');
-Route::view('/insumos','catalogos.insumos')->name('insumos');
+//Route::view('/insumos','catalogos.insumos')->name('insumos');
 Route::view('/proveedores','catalogos.proveedores')->name('proveedores');
 Route::get('/categorias',[CatalogoController::class,'categorias'])->name('categorias')->middleware('auth');
 Route::get('/categoria/{id}/subcategorias',[CatalogoController::class,'subcategorias'])->name('subcategorias')->middleware('auth');
@@ -30,6 +31,7 @@ Route::get('/categoria/{id}/subcategorias',[CatalogoController::class,'subcatego
 Route::resource('categoria',CategoryController::class)->middleware('auth');
 Route::resource('subcategoria',SubcategoryController::class)->middleware('auth');
 Route::resource('presentaciones',PresentationController::class)->middleware('auth');
+Route::resource('insumos',InsumoController::class)->middleware('auth');
 
 
 Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard1', function () {

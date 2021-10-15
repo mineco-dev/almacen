@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreatePresentationsTable extends Migration
+class CreateInsumosTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,14 @@ class CreatePresentationsTable extends Migration
      */
     public function up()
     {
-        Schema::create('presentations', function (Blueprint $table) {
+        Schema::create('insumos', function (Blueprint $table) {
             $table->id();
+            $table->bigInteger('codigo_sicoin')->unique();
             $table->string('nombre')->unique();
+            $table->string('descripcion');
+            $table->foreignId('subcategory_id')->constrained();
+            $table->foreignId('presentation_id')->constrained();
+            $table->integer('cantidad');
             $table->timestamps();
         });
     }
@@ -27,6 +32,6 @@ class CreatePresentationsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('presentations');
+        Schema::dropIfExists('insumos');
     }
 }

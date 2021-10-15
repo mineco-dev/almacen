@@ -16,17 +16,33 @@
                         <tbody class="bg-white divide-y divide-gray-200">
                             @foreach($items as $item)
                             <tr>
-                                @foreach($columns as $column)
-                                
-                                
-                                <td class="px-6 py-4 whitespace-nowrap">
-                                    <div class="text-sm text-gray-500">{{ $item->{$column} }}</div>
+                                                           
+                                <td class="px-6 py-4 whitespace-normal">
+                                    <div class="text-sm text-gray-500">{{ $item->codigo_sicoin }}</div>
                                 </td>
 
-                                @endforeach
+                                <td class="px-6 py-4 whitespace-normal">
+                                    <div class="text-sm text-gray-500">{{ $item->nombre }}</div>
+                                </td>
+
+                                <td class="px-6 py-4 whitespace-normal">
+                                    <div class="text-sm text-gray-500">{{ $item->descripcion }}</div>
+                                </td>
+
+                                <td class="px-6 py-4 whitespace-normal">
+                                    <div class="text-sm text-gray-500">{{ $item->category() }}</div>
+                                </td>
+
+                                <td class="px-6 py-4 whitespace-normal">
+                                    <div class="text-sm text-gray-500">{{ $item->subcategory->nombre }}</div>
+                                </td>
+
+                                <td class="px-6 py-4 whitespace-normal">
+                                    <div class="text-sm text-gray-500">{{ $item->cantidad }}</div>
+                                </td>
 
                                 @foreach($acciones as $accion)
-                                <td class="px-6 py-4 whitespace-nowrap">
+                                <td class="px-6 py-4 whitespace-normal">
                                     <a href="{{ route($ruta, $item->{$parametroRuta}) }}">
                                     @method('DELETE')
                                         <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold p-2 px-4 rounded focus:outline-none focus:shadow-outline mt-2">{{ $accion }}

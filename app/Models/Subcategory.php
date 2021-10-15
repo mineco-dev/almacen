@@ -15,6 +15,11 @@ class Subcategory extends Model
 
     public function category()
     {
-        return $this->belongsTo(Subcategory::class);
+        return $this->belongsTo(Category::class);
+    }
+
+    public function insumos()
+    {
+        return $this->hasMany(Insumo::class);
     }
 }

@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\presentation;
+use App\Models\Category;
+use App\Models\Insumo;
 use Illuminate\Http\Request;
-use App\Http\Requests\PresentationRequest;
 
-class PresentationController extends Controller
+class InsumoController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,9 +15,12 @@ class PresentationController extends Controller
      */
     public function index()
     {
-        $presentaciones = Presentation::latest()->paginate(15);
-        return view('catalogos.presentaciones',[
-            'presentaciones' => $presentaciones
+        $insumos = Insumo::latest()->paginate(15);
+        $categorias = Category::get();
+        
+        return view('catalogos.insumos',[
+            'insumos' => $insumos,
+            'categorias' => $categorias
         ]);
     }
 
@@ -37,20 +40,20 @@ class PresentationController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(PresentationRequest $request)
+    public function store(Request $request)
     {
-        $presentacion = Presentation::create($request->all());
+        $insumos = Insumo::create($request->all());
 
-        return back()->with('status','Agregado con éxito.');
+        return back()->with('status','Almacenado con éxito');
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\presentation  $presentation
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(presentation $presentation)
+    public function show($id)
     {
         //
     }
@@ -58,10 +61,10 @@ class PresentationController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\presentation  $presentation
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(presentation $presentation)
+    public function edit($id)
     {
         //
     }
@@ -70,10 +73,10 @@ class PresentationController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\presentation  $presentation
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, presentation $presentation)
+    public function update(Request $request, $id)
     {
         //
     }
@@ -81,13 +84,11 @@ class PresentationController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\presentation  $presentation
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
     {
-        Presentation::where('id',$id)->delete();
-
-        return back()->with('status','Eliminado con éxito');
+        //
     }
 }

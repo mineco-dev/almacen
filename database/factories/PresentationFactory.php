@@ -22,7 +22,7 @@ class PresentationFactory extends Factory
     public function definition()
     {
         return [
-            //
+            'nombre' => $this->faker->word
         ];
     }
 }

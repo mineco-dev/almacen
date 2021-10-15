@@ -17,4 +17,9 @@ class Category extends Model
     {
         return $this->hasMany(Subcategory::class);
     }
+
+    public function insumos()
+    {
+        return $this->hasMany(Insumo::class);
+    }
 }

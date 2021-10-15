@@ -2,7 +2,7 @@
 
 @section('content')
 
-
+    <x-presentacion-form></x-presentacion-form>
 
     &nbsp;
     @if (session('status'))
@@ -19,6 +19,8 @@
     @endif
 
     &nbsp;
+
+    <x-table-button-form :items="$presentaciones" :titles="['Presentación','Acción']" :columns="['nombre']" :acciones="['Eliminar']" parametroRuta="id" ruta="presentaciones.destroy"/>
 
 
 

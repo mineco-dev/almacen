@@ -29,7 +29,7 @@
     
     <footer class="py-4 text-center">
         @auth
-        <a href="{{url('dashboard')}}" class="text-sm text-gray-700 underline">Dashboard</a>
+        <a href="{{url('dashboard')}}" class="text-sm text-gray-700 underline">Página Principal</a>
 
         @else
         <a href="{{url('login')}}" class="text-sm text-gray-700 underline">Login</a>
@@ -40,6 +40,8 @@
 
 
     </footer>
+
+    @yield('script')
 
 
 </body>

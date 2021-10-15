@@ -26,4 +26,11 @@ class CatalogoController extends Controller
             'categoria' => $categoria
         ]);
     }
+
+    public function subcategoriasApi($id)
+    {
+        $categoria = Category::findOrFail($id)->subcategorias()->get();
+
+        return response()->json($categoria);
+    }
 }

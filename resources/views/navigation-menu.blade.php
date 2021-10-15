@@ -28,7 +28,7 @@
 
                             <x-slot name="content">
                                 <!-- Account Management -->
-                                <x-jet-dropdown-link href="{{ route('insumos') }}">
+                                <x-jet-dropdown-link href="{{ route('insumos.index') }}">
                                     Insumos
                                 </x-jet-dropdown-link>
 
