@@ -70,7 +70,15 @@ class InsumoController extends Controller
      */
     public function edit($id)
     {
-        //
+        $insumo = Insumo::where('id',$id)->first();
+        $categorias = Category::get();
+        $presentaciones = presentation::get();
+        return view('edit.insumos',[
+            'insumo'=>$insumo,
+            'categorias' => $categorias,
+            'presentaciones' =>$presentaciones
+        ]);
+        
     }
 
     /**

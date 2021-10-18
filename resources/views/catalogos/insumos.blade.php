@@ -25,7 +25,7 @@
 
 &nbsp;
 
-<x-insumos-table :items="$insumos" :titles="['Código Sicoin','Nombre','Descripción','Categoría','Subcategoría','Cantidad','']" :acciones="['Eliminar']" parametroRuta="id" ruta="insumos.destroy" />
+<x-insumos-table :items="$insumos" :titles="['Código Sicoin','Nombre','Descripción','Categoría','Subcategoría','Cantidad','','']" :acciones="['Eliminar']" ruta="insumos.destroy" :acciones1="['Editar']" ruta1="insumos.edit"/>
 
 @endsection
 

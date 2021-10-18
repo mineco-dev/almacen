@@ -1,20 +1,23 @@
+@extends('layouts.web')
+
+@section('content')
 <div class="grid justify-center ">
     <form action="{{ route('insumos.store') }}" class="p-8 shadow-md rounded-md text-left" method="POST">
         @csrf
 
         <label class="block mb-2">
-            <span class="block text-gray-700 text-sm font-bold mb-2">Código de Insumo</span>
-            <input value="{{ old('codigo_sicoin') }}" type="text" name="codigo_sicoin" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" placeholder="" required>
+            <span class="block text-gray-700 text-sm font-bold mb-2">Código Sicoin </span>
+            <input value="{{ $insumo->codigo_sicoin }}" type="text" name="codigo_sicoin" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" placeholder="" required>
         </label>
 
         <label class="block mb-2">
             <span class="block text-gray-700 text-sm font-bold mb-2">Nombre</span>
-            <input type="text" name="nombre" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" placeholder="" required>
+            <input value="{{ $insumo->nombre }}" type="text" name="nombre" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" placeholder="" required>
         </label>
 
         <label class="block mb-2">
             <span class="block text-gray-700 text-sm font-bold mb-2">Descripción</span>
-            <input type="text" name="descripcion" class="leading-tight shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" placeholder="" required>
+            <input value="{{ $insumo->descripcion }}" type="text" name="descripcion" class="leading-tight shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" placeholder="" required>
         </label>
 
         <div class="block mb-2">
@@ -24,8 +27,9 @@
             <div class="relative">
                 <select class="block appearance-none w-full border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="cat" onchange="cargarSubcategorias()" required>
                 <option value=""></option>    
+                <option selected="true" disabled="disabled">{{ $insumo->descripcion }}</option>
                 @foreach($categorias as $categoria)
-                    <option value="{{ $categoria->id }}">{{$categoria->renglon}}-{{$categoria->nombre}}</option>
+                    <option value="{{ $categoria->id }}">{{$categoria->nombre}}</option>
                     @endforeach
                 </select>
 
@@ -39,7 +43,7 @@
             <div class="relative">
                 <select class="block appearance-none w-full border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="subcategoria" required name="subcategory_id">
 
-                    <option></option>
+                    <option selected="true" disabled="disabled">{{ $insumo->subcategory_id }}</option>
 
                 </select>
 
@@ -63,7 +67,7 @@
 
         <label class="block mb-2">
             <span class="block text-gray-700 text-sm font-bold mb-2">Cantidad</span>
-            <input type="text" name="cantidad" class="leading-tight shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" placeholder="" required>
+            <input value="{{ $insumo->cantidad }}" type="text" name="cantidad" class="leading-tight shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" placeholder="" required>
         </label>
 
         @if ($errors->any())
@@ -81,3 +85,60 @@
     </form>
 
 </div>
+@endsection
+
+@section('script')
+<script>
+    function cargarSubcategorias() {
+
+        $val = document.getElementById("cat").value;
+        $ruta = '/api/categoria/' + $val + '/subcategorias';
+        console.log($ruta);
+
+        axios.get($ruta)
+            .then(function(response) {
+
+                var subcategoria = document.querySelector('#subcategoria');
+                limpiar(subcategoria);
+                for (var i = 0; i < response.data.length; i++) {
+                    var opt = document.createElement('option');
+                    opt.innerHTML = response.data[i].nombre;
+                    opt.value = response.data[i].id;
+                    subcategoria.appendChild(opt);
+                }
+            })
+            .catch(function(error) {
+                // handle error
+                console.log(error);
+            })
+            .then(function() {
+                // always executed
+            });
+
+
+
+    }
+
+    function limpiar($objeto) {
+        while ($objeto.options.length > 0) {
+            $objeto.remove(0);
+        }
+    }
+</script>
+
+@endsection
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
