@@ -86,8 +86,14 @@ class PresentationController extends Controller
      */
     public function destroy($id)
     {
+        try{
         Presentation::where('id',$id)->delete();
 
         return back()->with('status','Eliminado con éxito');
+        }
+        catch (\Exception $e){
+            //return response()->json($e->getMessage(), 500);
+            return back()->with('status','No se puede eliminar ya que este registro está siendo utilizado por otra tabla.');
+        }
     }
 }

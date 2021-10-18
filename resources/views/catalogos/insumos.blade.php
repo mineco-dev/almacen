@@ -5,7 +5,7 @@
     <h1 class="text-3xl text-gray-700 mb-2 uppercase">Catálogo Insumos</h1>
 </div>
 
-<x-insumos-form :categorias="$categorias"/>
+<x-insumos-form :categorias="$categorias" :presentaciones="$presentaciones" />
 
 &nbsp;
 @if (session('status'))
@@ -25,26 +25,47 @@
 
 &nbsp;
 
-<x-insumos-table :items="$insumos" :titles="['Código Sicoin','Nombre','Descripción','Categoría','Subcategoría','Cantidad','']" :acciones="['Subcategorías']" parametroRuta="id" ruta="subcategorias"/>
+<x-insumos-table :items="$insumos" :titles="['Código Sicoin','Nombre','Descripción','Categoría','Subcategoría','Cantidad','']" :acciones="['Eliminar']" parametroRuta="id" ruta="insumos.destroy" />
 
 @endsection
 
 @section('script')
-    <script>
-        function cargarSubcategorias(){
-        
-        $val=document.getElementById("cat").value;
-        $ruta='/api/categoria/'+$val+'/subcategorias';
+<script>
+    function cargarSubcategorias() {
+
+        $val = document.getElementById("cat").value;
+        $ruta = '/api/categoria/' + $val + '/subcategorias';
         console.log($ruta);
 
-        axios.get($ruta , {
+        axios.get($ruta)
+            .then(function(response) {
 
-        });
+                var subcategoria = document.querySelector('#subcategoria');
+                limpiar(subcategoria);
+                for (var i = 0; i < response.data.length; i++) {
+                    var opt = document.createElement('option');
+                    opt.innerHTML = response.data[i].nombre;
+                    opt.value = response.data[i].id;
+                    subcategoria.appendChild(opt);
+                }
+            })
+            .catch(function(error) {
+                // handle error
+                console.log(error);
+            })
+            .then(function() {
+                // always executed
+            });
 
 
 
+    }
+
+    function limpiar($objeto) {
+        while ($objeto.options.length > 0) {
+            $objeto.remove(0);
         }
+    }
+</script>
 
-    </script>
-    
 @endsection

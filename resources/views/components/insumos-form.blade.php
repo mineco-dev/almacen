@@ -4,7 +4,7 @@
 
         <label class="block mb-2">
             <span class="block text-gray-700 text-sm font-bold mb-2">Código Sicoin </span>
-            <input type="text" name="codigo_sicoin" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" placeholder="" required>
+            <input value="{{ old('codigo_sicoin') }}" type="text" name="codigo_sicoin" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" placeholder="" required>
         </label>
 
         <label class="block mb-2">
@@ -22,8 +22,9 @@
                 Categoría
             </label>
             <div class="relative">
-                <select class="block appearance-none w-full border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="cat" onchange="cargarSubcategorias()">
-                    @foreach($categorias as $categoria)
+                <select class="block appearance-none w-full border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="cat" onchange="cargarSubcategorias()" required>
+                <option value=""></option>    
+                @foreach($categorias as $categoria)
                     <option value="{{ $categoria->id }}">{{$categoria->nombre}}</option>
                     @endforeach
                 </select>
@@ -36,24 +37,29 @@
                 SubCategoría
             </label>
             <div class="relative">
-                <select class="block appearance-none w-full border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-state">
-                    @foreach($categorias as $categoria)
-                    <option>{{$categoria->nombre}}</option>
-                    @endforeach
+                <select class="block appearance-none w-full border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="subcategoria" required name="subcategory_id">
+
+                    <option></option>
+
                 </select>
 
             </div>
         </div>
 
-        <label class="block mb-2">
-            <span class="block text-gray-700 text-sm font-bold mb-2">Subcategoría</span>
-            <input type="text" name="subcategory_id" class="leading-tight shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" placeholder="" required>
-        </label>
+        <div class="block mb-2">
+            <label class="block text-gray-700 text-sm font-bold mb-2" for="grid-state">
+                Presentación
+            </label>
+            <div class="relative">
+                <select class="block appearance-none w-full border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="cat" onchange="cargarSubcategorias()" required name="presentation_id">
+                <option value=""></option>    
+                    @foreach($presentaciones as $presentacion)
+                    <option value="{{ $presentacion->id }}">{{$presentacion->nombre}}</option>
+                    @endforeach
+                </select>
 
-        <label class="block mb-2">
-            <span class="block text-gray-700 text-sm font-bold mb-2">Presentación</span>
-            <input type="text" name="presentation_id" class="leading-tight shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" placeholder="" required>
-        </label>
+            </div>
+        </div>
 
         <label class="block mb-2">
             <span class="block text-gray-700 text-sm font-bold mb-2">Cantidad</span>

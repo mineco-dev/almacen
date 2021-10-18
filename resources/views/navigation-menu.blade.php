@@ -27,21 +27,24 @@
                             </x-slot>
 
                             <x-slot name="content">
-                                <!-- Account Management -->
-                                <x-jet-dropdown-link href="{{ route('insumos.index') }}">
-                                    Insumos
-                                </x-jet-dropdown-link>
+                                <!-- Account Management -->                                
 
                                 <x-jet-dropdown-link href="{{ route('categorias') }}">
                                     Categoría
                                 </x-jet-dropdown-link>
 
-                                <x-jet-dropdown-link href="{{ route('proveedores') }}">
-                                    Proveedores
-                                </x-jet-dropdown-link>
-
                                 <x-jet-dropdown-link href="{{ route('presentaciones.index') }}">
                                     Presentaciones
+                                </x-jet-dropdown-link>
+
+                                <div class="border-t border-gray-300"></div>
+
+                                <x-jet-dropdown-link href="{{ route('insumos.index') }}">
+                                    Insumos
+                                </x-jet-dropdown-link>
+
+                                <x-jet-dropdown-link href="{{ route('proveedores') }}">
+                                    Proveedores
                                 </x-jet-dropdown-link>
 
                             </x-slot>

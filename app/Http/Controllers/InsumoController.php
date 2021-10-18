@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Models\Category;
 use App\Models\Insumo;
+use App\Models\presentation;
 use Illuminate\Http\Request;
+use App\Http\Requests\InsumoRequest;
 
 class InsumoController extends Controller
 {
@@ -17,10 +19,12 @@ class InsumoController extends Controller
     {
         $insumos = Insumo::latest()->paginate(15);
         $categorias = Category::get();
-        
-        return view('catalogos.insumos',[
+        $presentaciones = Presentation::get();
+
+        return view('catalogos.insumos', [
             'insumos' => $insumos,
-            'categorias' => $categorias
+            'categorias' => $categorias,
+            'presentaciones' => $presentaciones
         ]);
     }
 
@@ -40,11 +44,11 @@ class InsumoController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(InsumoRequest $request)
     {
         $insumos = Insumo::create($request->all());
 
-        return back()->with('status','Almacenado con éxito');
+        return back()->with('status', 'Almacenado con éxito');
     }
 
     /**
@@ -89,6 +93,12 @@ class InsumoController extends Controller
      */
     public function destroy($id)
     {
-        //
+        try {
+            Insumo::where('id', $id)->delete();
+            return back()->with('status', 'Eliminado con éxito');
+        } catch (\Exception $e) {
+
+            return back()->with('status', 'No se puede eliminar ya que este registro está siendo utilizado por otra tabla.');
+        }
     }
 }
