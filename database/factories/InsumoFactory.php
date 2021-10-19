@@ -26,8 +26,7 @@ class InsumoFactory extends Factory
             'nombre' => $this->faker->word,
             'descripcion' => $this->faker->text(45),
             'subcategory_id' => $this->faker->numberBetween(1, 25),
-            'presentation_id' => $this->faker->numberBetween(1,15),
-            'cantidad' => $this->faker->randomNumber(2, false)
+            'presentation_id' => $this->faker->numberBetween(1,15)
         ];
     }
 }

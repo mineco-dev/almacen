@@ -3,10 +3,14 @@
 namespace App\Http\Controllers;
 
 use App\Models\Category;
+use App\Models\Subcategory;
 use App\Models\Insumo;
 use App\Models\presentation;
 use Illuminate\Http\Request;
 use App\Http\Requests\InsumoRequest;
+use App\Http\Requests\InsumoUpdateRequest;
+use App\View\Components\subcategoria;
+use Illuminate\Support\Facades\DB;
 
 class InsumoController extends Controller
 {
@@ -70,13 +74,27 @@ class InsumoController extends Controller
      */
     public function edit($id)
     {
-        $insumo = Insumo::where('id',$id)->first();
+        //$insumo = Insumo::where('id',$id)->first();
+
+        $insumo = DB::table('insumos')
+        ->join('subcategories', 'insumos.subcategory_id', '=', 'subcategories.id')
+        ->join('presentations', 'insumos.presentation_id', '=', 'presentations.id')
+        ->select('insumos.*', 'subcategories.nombre as name_subcategory', 'presentations.nombre as name_presentation')
+        ->where('insumos.id','=',$id)
+        ->first();
+        $subcategoria=Insumo::find($id)->subcategory;
+        $cat=Subcategory::find($subcategoria->id)->category;
         $categorias = Category::get();
+        $subcategorias = Subcategory::get();
         $presentaciones = presentation::get();
         return view('edit.insumos',[
             'insumo'=>$insumo,
+            'cat'=>$cat,
             'categorias' => $categorias,
-            'presentaciones' =>$presentaciones
+            'presentaciones' =>$presentaciones,
+            'subcategoria' => $subcategoria,
+            'subcategorias' => $subcategorias
+
         ]);
         
     }
@@ -88,9 +106,15 @@ class InsumoController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(InsumoUpdateRequest $request, Insumo $insumo)
     {
-        //
+        try{
+            $insumo->update($request->all());
+            //return back()->with('status','Actualizado con éxito.');
+            return redirect('insumos')->with('status','Actualizado con éxito.');
+        } catch (\Exception $e){
+            return back()->with('status',$e->getMessage());
+        }
     }
 
     /**

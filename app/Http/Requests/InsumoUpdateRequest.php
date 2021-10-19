@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class InsumoRequest extends FormRequest
+class InsumoUpdateRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,8 +24,8 @@ class InsumoRequest extends FormRequest
     public function rules()
     {
         return [
-            'codigo_sicoin' => 'required|numeric|unique:insumos',
-            'nombre' => 'required|unique:insumos',
+            'codigo_sicoin' => 'required|numeric',
+            'nombre' => 'required',
             'descripcion' => 'required',
             'subcategory_id' => 'required|numeric',
             'presentation_id' => 'required|numeric'

@@ -10,7 +10,7 @@ class Insumo extends Model
     use HasFactory;
 
     protected $fillable = [
-        'codigo_sicoin','nombre','descripcion','subcategory_id','presentation_id','cantidad'
+        'codigo_sicoin','nombre','descripcion','subcategory_id','presentation_id'
     ];
 
     public function subcategory()

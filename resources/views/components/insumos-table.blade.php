@@ -37,9 +37,6 @@
                                     <div class="text-sm text-gray-500">{{ $item->subcategory->nombre }}</div>
                                 </td>
 
-                                <td class="px-6 py-4 whitespace-normal">
-                                    <div class="text-sm text-gray-500">{{ $item->cantidad }}</div>
-                                </td>
 
                                 @foreach($acciones1 as $accion)
                                 <td class="px-6 py-4 whitespace-normal">
@@ -54,7 +51,7 @@
                                     <form action="{{ route($ruta,$item) }}" method="POST">
                                         @csrf
                                         @method('DELETE')
-                                        <input type="submit" value="{{ $accion }}" class="bg-red-500 hover:bg-blue-700 text-white font-bold p-2 px-4 rounded mt-2" onclick="return confirm('¿Deseas eliminar?')">
+                                        <input type="submit" value="{{ $accion }}" class="bg-red-500 hover:bg-red-700 text-white font-bold p-2 px-4 rounded mt-2" onclick="return confirm('¿Deseas eliminar?')">
                                     </form>
                                 </td>
                                 @endforeach

@@ -2,8 +2,21 @@
 
 @section('content')
 <div class="grid justify-center ">
-    <form action="{{ route('insumos.store') }}" class="p-8 shadow-md rounded-md text-left" method="POST">
-        @csrf
+    @if (session('status'))
+
+    <div class="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded relative" role="alert">
+        <strong class="font-bold">{{ session('status') }}</strong>
+
+        <span class="absolute top-0 bottom-0 right-0 px-4 py-3">
+            <svg class="fill-current h-6 w-6 text-green-500" role="button" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+                <title>Close</title>
+                <path d="M14.348 14.849a1.2 1.2 0 0 1-1.697 0L10 11.819l-2.651 3.029a1.2 1.2 0 1 1-1.697-1.697l2.758-3.15-2.759-3.152a1.2 1.2 0 1 1 1.697-1.697L10 8.183l2.651-3.031a1.2 1.2 0 1 1 1.697 1.697l-2.758 3.152 2.758 3.15a1.2 1.2 0 0 1 0 1.698z" />
+            </svg>
+        </span>
+        </span>
+    </div>
+    @endif
+    <form action="{{ route('insumos.update',$insumo->id) }}" class="p-8 shadow-md rounded-md text-left" method="POST">
 
         <label class="block mb-2">
             <span class="block text-gray-700 text-sm font-bold mb-2">Código Sicoin </span>
@@ -26,9 +39,9 @@
             </label>
             <div class="relative">
                 <select class="block appearance-none w-full border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="cat" onchange="cargarSubcategorias()" required>
-                <option value=""></option>    
-                <option selected="true" disabled="disabled">{{ $insumo->descripcion }}</option>
-                @foreach($categorias as $categoria)
+                    <option value=""></option>
+                    <option selected disabled="disabled">{{ $cat->nombre }}</option>
+                    @foreach($categorias as $categoria)
                     <option value="{{ $categoria->id }}">{{$categoria->nombre}}</option>
                     @endforeach
                 </select>
@@ -41,9 +54,9 @@
                 SubCategoría
             </label>
             <div class="relative">
-                <select class="block appearance-none w-full border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="subcategoria" required name="subcategory_id">
+                <select name="subcategory_id" class="block appearance-none w-full border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="subcategoria" required>
 
-                    <option selected="true" disabled="disabled">{{ $insumo->subcategory_id }}</option>
+                    <option selected value="{{ $subcategoria->id }}">{{ $subcategoria->nombre }}</option>
 
                 </select>
 
@@ -55,20 +68,20 @@
                 Presentación
             </label>
             <div class="relative">
-                <select class="block appearance-none w-full border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="cat" onchange="cargarSubcategorias()" required name="presentation_id">
-                <option value=""></option>    
+                <select class="block appearance-none w-full border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500" required name="presentation_id">
+                    <!-- <option selected>{{ $insumo->name_presentation }}</option>  -->
                     @foreach($presentaciones as $presentacion)
+                    @if("{{ $insumo->name_presentation }}" == "{{$presentacion->nombre}}")
+                    <option selected value="{{ $presentacion->id }}">{{$presentacion->nombre}}</option>
+                    @else
                     <option value="{{ $presentacion->id }}">{{$presentacion->nombre}}</option>
+                    @endif
                     @endforeach
                 </select>
 
             </div>
         </div>
 
-        <label class="block mb-2">
-            <span class="block text-gray-700 text-sm font-bold mb-2">Cantidad</span>
-            <input value="{{ $insumo->cantidad }}" type="text" name="cantidad" class="leading-tight shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" placeholder="" required>
-        </label>
 
         @if ($errors->any())
         <div class="text-red-500 text-sm">
@@ -81,8 +94,15 @@
         @endif
 
 
-        <input type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold p-2 px-4 rounded focus:outline-none focus:shadow-outline mt-2" value="Crear">
+        @csrf
+        @method('PUT')
+        <input type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold p-2 px-4 rounded focus:outline-none focus:shadow-outline mt-2" value="Actualizar">
+        <a href="/insumos" class="bg-red-500 hover:bg-red-700 text-white font-bold p-2 px-4 rounded focus:outline-none focus:shadow-outline mt-2">Cancelar Acción</a>
+
     </form>
+    
+
+
 
 </div>
 @endsection
@@ -127,18 +147,3 @@
 </script>
 
 @endsection
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

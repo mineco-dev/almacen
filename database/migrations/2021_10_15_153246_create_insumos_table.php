@@ -20,7 +20,6 @@ class CreateInsumosTable extends Migration
             $table->string('descripcion');
             $table->foreignId('subcategory_id')->constrained();
             $table->foreignId('presentation_id')->constrained();
-            $table->integer('cantidad');
             $table->timestamps();
         });
     }
