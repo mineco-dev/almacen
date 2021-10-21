@@ -8,6 +8,7 @@ use App\Models\Insumo;
 use App\Models\Subcategory;
 use App\Models\User;
 use App\Models\presentation;
+use App\Models\Provider;
 
 class DatabaseSeeder extends Seeder
 {
@@ -25,8 +26,9 @@ class DatabaseSeeder extends Seeder
             'password' => bcrypt('12345678')
         ]); 
         Subcategory::factory(25)->create();
-        Presentation::factory(15)->create();
+        Presentation::factory(5)->create();
         Insumo::factory(15)->create();
+        Provider::factory(20)->create();
     }
 }
 /* App\User::create([
