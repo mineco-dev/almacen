@@ -44,6 +44,7 @@
         
 
         <input type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold p-2 px-4 rounded focus:outline-none focus:shadow-outline mt-2" value="Actualizar">
+        <a href="/proveedor" class="bg-red-500 hover:bg-red-700 text-white font-bold p-2 px-4 rounded focus:outline-none focus:shadow-outline mt-2">Cancelar Acción</a>
     </form>
     &nbsp;
 

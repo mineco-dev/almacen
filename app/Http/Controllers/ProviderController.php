@@ -63,9 +63,9 @@ class ProviderController extends Controller
      */
     public function edit($id)
     {
-        $provider = DB::table('providers')
-                    ->where('id',$id)
-                    ->first();
+
+        $provider = Provider::find($id);
+        //dd($provider);
 
         return view('livewire.provider.edit',[
             'provider' => $provider
@@ -79,12 +79,14 @@ class ProviderController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(ProviderUpdateRequest $request, Provider $provider)
+    public function update(ProviderUpdateRequest $request, $id)
     {
         try{
-            $provider->update($request->all());
+            $provider = Provider::find($id)->update($request->all());
+            //dd($request->all());
+            //$provider->update($request->all());
             
-            return redirect('proveedor')->with('status','Actualizado con éxito.');
+            return redirect()->route('proveedores')->with('status','Actualizado con éxito.');
 
         } catch(\Exception $e){
             return back()->with('status',$e->getMessage());

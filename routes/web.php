@@ -34,7 +34,7 @@ Route::resource('categoria',CategoryController::class)->middleware('auth');
 Route::resource('subcategoria',SubcategoryController::class)->middleware('auth');
 Route::resource('presentaciones',PresentationController::class)->middleware('auth');
 Route::resource('insumos',InsumoController::class)->middleware('auth');
-Route::resource('proveedores',ProviderController::class)->middleware('auth');
+Route::resource('proveedores',ProviderController::class)->except('index')->middleware('auth');
 
 
 Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard1', function () {
