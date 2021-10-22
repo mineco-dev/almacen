@@ -1153,10 +1153,6 @@ select {
 	margin-top: -0.5rem;
 	margin-bottom: -0.5rem;
 }
-.mx-10 {
-	margin-left: 2.5rem;
-	margin-right: 2.5rem;
-}
 .ml-3 {
 	margin-left: 0.75rem;
 }
@@ -1402,15 +1398,6 @@ select {
 .grid-cols-1 {
 	grid-template-columns: repeat(1, minmax(0, 1fr));
 }
-.grid-cols-2 {
-	grid-template-columns: repeat(2, minmax(0, 1fr));
-}
-.grid-cols-4 {
-	grid-template-columns: repeat(4, minmax(0, 1fr));
-}
-.grid-cols-5 {
-	grid-template-columns: repeat(5, minmax(0, 1fr));
-}
 .grid-cols-3 {
 	grid-template-columns: repeat(3, minmax(0, 1fr));
 }
@@ -1440,9 +1427,6 @@ select {
 }
 .gap-1 {
 	gap: 0.25rem;
-}
-.gap-5 {
-	gap: 1.25rem;
 }
 .space-x-8 > :not([hidden]) ~ :not([hidden]) {
 	--tw-space-x-reverse: 0;

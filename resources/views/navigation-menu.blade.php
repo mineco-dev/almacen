@@ -47,6 +47,10 @@
                                     Proveedores
                                 </x-jet-dropdown-link>
 
+                                <x-jet-dropdown-link href="{{ route('ingreso-live') }}">
+                                    Ingreso
+                                </x-jet-dropdown-link>
+
                             </x-slot>
                         </x-jet-dropdown>
 
