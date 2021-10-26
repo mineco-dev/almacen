@@ -2,12 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Ingreso;
+use App\Models\Bodega;
 use Illuminate\Http\Request;
-use App\Http\Requests\IngresoStoreRequest;
-use Prophecy\Promise\ReturnPromise;
 
-class IngresoController extends Controller
+class BodegaController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,8 +14,10 @@ class IngresoController extends Controller
      */
     public function index()
     {
-
-        return view('frontend.ingreso.index');
+        $bodegas = Bodega::latest()->paginate();
+        return view('catalogos.bodegas',[
+            'bodegas' => $bodegas
+        ]);
     }
 
     /**
@@ -27,7 +27,7 @@ class IngresoController extends Controller
      */
     public function create()
     {
-        
+        //
     }
 
     /**
@@ -36,20 +36,18 @@ class IngresoController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(IngresoStoreRequest $request)
+    public function store(Request $request)
     {
-        $ingreso = Ingreso::create($request->all());
-
-        return redirect()->route('ingreso.index')->with('status','Almacenado correctamente.');
+        //
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Ingreso  $ingreso
+     * @param  \App\Models\Bodega  $bodega
      * @return \Illuminate\Http\Response
      */
-    public function show(Ingreso $ingreso)
+    public function show(Bodega $bodega)
     {
         //
     }
@@ -57,10 +55,10 @@ class IngresoController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Ingreso  $ingreso
+     * @param  \App\Models\Bodega  $bodega
      * @return \Illuminate\Http\Response
      */
-    public function edit(Ingreso $ingreso)
+    public function edit(Bodega $bodega)
     {
         //
     }
@@ -69,10 +67,10 @@ class IngresoController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Ingreso  $ingreso
+     * @param  \App\Models\Bodega  $bodega
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Ingreso $ingreso)
+    public function update(Request $request, Bodega $bodega)
     {
         //
     }
@@ -80,10 +78,10 @@ class IngresoController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Ingreso  $ingreso
+     * @param  \App\Models\Bodega  $bodega
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Ingreso $ingreso)
+    public function destroy(Bodega $bodega)
     {
         //
     }

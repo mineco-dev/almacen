@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\BodegaController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Catalogos\CatalogoController;
 use App\Http\Controllers\CategoryController;
@@ -8,6 +9,7 @@ use App\Http\Controllers\SubcategoryController;
 use App\Http\Controllers\PresentationController;
 use App\Http\Controllers\InsumoController;
 use App\Http\Controllers\ProviderController;
+use App\Http\Controllers\DependencyController;
 use App\Http\Livewire\Provider\Index;
 use App\Http\Livewire\Ingreso\Form;
 
@@ -35,11 +37,13 @@ Route::get('/categoria/{id}/subcategorias',[CatalogoController::class,'subcatego
 Route::resource('categoria',CategoryController::class)->middleware('auth');
 Route::resource('subcategoria',SubcategoryController::class)->middleware('auth');
 Route::resource('presentaciones',PresentationController::class)->middleware('auth');
+Route::resource('dependencias',DependencyController::class)->middleware('auth');
 Route::resource('insumos',InsumoController::class)->middleware('auth');
 Route::resource('proveedores',ProviderController::class)->except('index')->middleware('auth');
+Route::resource('bodegas',BodegaController::class)->middleware('auth');
 
-Route::get('ingreso',Form::class,'render')->name('ingreso-live');
-Route::resource('ingreso',IngresoController::class)->except('index')->middleware('auth');
+Route::get('crear-ingreso',Form::class,'render')->name('ingreso-live');
+Route::resource('ingreso',IngresoController::class)->middleware('auth');
 
 
 Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard1', function () {

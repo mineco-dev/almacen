@@ -2,12 +2,14 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Ingreso;
+use App\Models\Dependency;
 use Illuminate\Http\Request;
-use App\Http\Requests\IngresoStoreRequest;
-use Prophecy\Promise\ReturnPromise;
 
-class IngresoController extends Controller
+use App\Http\Requests\DependencyStoreRequest;
+
+use function Ramsey\Uuid\v1;
+
+class DependencyController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,8 +18,10 @@ class IngresoController extends Controller
      */
     public function index()
     {
-
-        return view('frontend.ingreso.index');
+        $dependencias = Dependency::latest()->paginate();
+        return view('catalogos.dependencias',[
+            'dependencias' => $dependencias
+        ]);
     }
 
     /**
@@ -27,7 +31,7 @@ class IngresoController extends Controller
      */
     public function create()
     {
-        
+        //
     }
 
     /**
@@ -36,20 +40,20 @@ class IngresoController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(IngresoStoreRequest $request)
+    public function store(DependencyStoreRequest $request)
     {
-        $ingreso = Ingreso::create($request->all());
+        $dependencia = Dependency::create($request->all());
 
-        return redirect()->route('ingreso.index')->with('status','Almacenado correctamente.');
+        return back()->with('status','Almacenado con éxito.');
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Ingreso  $ingreso
+     * @param  \App\Models\Dependency  $dependency
      * @return \Illuminate\Http\Response
      */
-    public function show(Ingreso $ingreso)
+    public function show(Dependency $dependency)
     {
         //
     }
@@ -57,10 +61,10 @@ class IngresoController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Ingreso  $ingreso
+     * @param  \App\Models\Dependency  $dependency
      * @return \Illuminate\Http\Response
      */
-    public function edit(Ingreso $ingreso)
+    public function edit(Dependency $dependency)
     {
         //
     }
@@ -69,10 +73,10 @@ class IngresoController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Ingreso  $ingreso
+     * @param  \App\Models\Dependency  $dependency
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Ingreso $ingreso)
+    public function update(Request $request, Dependency $dependency)
     {
         //
     }
@@ -80,11 +84,13 @@ class IngresoController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Ingreso  $ingreso
+     * @param  \App\Models\Dependency  $dependency
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Ingreso $ingreso)
+    public function destroy($id)
     {
-        //
+        $dependencia = Dependency::find($id)->delete();
+
+        return back()->with('status','Eliminado satisfactoriamente.');
     }
 }

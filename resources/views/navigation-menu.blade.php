@@ -33,8 +33,16 @@
                                     Categoría
                                 </x-jet-dropdown-link>
 
+                                <x-jet-dropdown-link href="{{ route('bodegas.index') }}">
+                                    Bodegas
+                                </x-jet-dropdown-link>
+
                                 <x-jet-dropdown-link href="{{ route('presentaciones.index') }}">
                                     Presentaciones
+                                </x-jet-dropdown-link>
+
+                                <x-jet-dropdown-link href="{{ route('dependencias.index') }}">
+                                    Dependencias
                                 </x-jet-dropdown-link>
 
                                 <div class="border-t border-gray-300"></div>

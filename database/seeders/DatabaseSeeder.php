@@ -2,8 +2,10 @@
 
 namespace Database\Seeders;
 
+use App\Models\Bodega;
 use Illuminate\Database\Seeder;
 use App\Models\Category;
+use App\Models\Dependency;
 use App\Models\Insumo;
 use App\Models\Subcategory;
 use App\Models\User;
@@ -29,6 +31,10 @@ class DatabaseSeeder extends Seeder
         Presentation::factory(5)->create();
         Insumo::factory(15)->create();
         Provider::factory(20)->create();
+        Dependency::factory(20)->create();
+
+        Bodega::create(['nombre' => 'Compra Directa']);
+        Bodega::create(['nombre' => 'Compra de Stock']);
     }
 }
 /* App\User::create([
