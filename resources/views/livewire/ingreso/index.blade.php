@@ -30,6 +30,9 @@
                                 <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                                     Observaciones
                                 </th>
+                                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                    
+                                </th>
                             </tr>
                         </thead>
                         <tbody class="bg-white divide-y divide-gray-200">
@@ -58,6 +61,9 @@
                                 </td>
                                 <td class="px-6 py-4 whitespace-normal">
                                     <div class="text-sm text-gray-500">{{ $ingreso->observaciones}}</div>
+                                </td>
+                                <td class="px-6 py-4 whitespace-normal">
+                                    <a href=""><button class="bg-blue-500 hover:bg-blue-700 text-white font-bold p-2 px-4 rounded focus:outline-none focus:shadow-outline mt-2">Agregar Insumos</button></a>
                                 </td>
                             </tr>
                             @endforeach

@@ -87,4 +87,9 @@ class IngresoController extends Controller
     {
         //
     }
+
+    public function productos($no_ingreso)
+    {
+        //Aquí van los productos
+    }
 }
