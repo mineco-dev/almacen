@@ -46,7 +46,8 @@ Route::resource('bodegas',BodegaController::class)->middleware('auth');
 /* RUTAS DE INGRESO */
 Route::get('crear-ingreso',Form::class,'render')->name('ingreso-live');
 Route::resource('ingreso',IngresoController::class)->middleware('auth');
-/* Route::get('ingreso/{$no_ingreso}',IngresoController::class)->only('productos')->name('ingreso.productos'); */
+/* 
+ */
 
 /*------------------------------------------------------------------------------*/
 
